@@ -34,6 +34,7 @@ class Calculator():
     def get_today_remained(self):
         return self.limit - self.get_today_stats()
 
+
 class CaloriesCalculator(Calculator):
     def get_calories_remained(slef):
         ans = super().get_today_remained()
@@ -41,11 +42,15 @@ class CaloriesCalculator(Calculator):
             return 'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более %d кКал'%(ans)
         else:
             return 'Хватит есть!'
+
+
 class CashCalculator(Calculator):
     EURO_RATE = 70.0
     USD_RATE = 65.0
+
     def __init__(self, limit):
         super().__init__(limit)
+
     def get_today_cash_remained(self, currency):
         ans = super().get_today_remained()
         if currency == 'rub':
@@ -75,11 +80,3 @@ class Record():
         self.amount = amount
         self.comment = comment
         self.date = date_from_string(date)
-
-if __name__ == '__main__':
-    calc = CashCalculator(100)
-    calc.add_record(Record(25,'','28.12.2020'))
-    calc.add_record(Record(25,'','30.12.2020'))
-    calc.add_record(Record(25,'','30.12.2020'))
-    calc.add_record(Record(25,'','30.12.2020'))
-    print(calc.get_today_cash_remained('rub'))
